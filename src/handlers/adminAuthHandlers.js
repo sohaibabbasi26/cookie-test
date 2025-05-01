@@ -32,19 +32,17 @@ const adminLoginHandler = async (request, response) => {
 
     response.cookie("accessToken", result?.token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       maxAge: 900 * 1000,
-      sameSite: "Lax",
-      domain: 'localhost',
+      sameSite: "None",
       path: "/",
     });
 
     response.cookie("refreshToken", result?.refreshToken, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000,
-      sameSite: "Lax",  
-      domain: 'localhost',
+      sameSite: "None",  
       path: "/",
     });
 

@@ -20,7 +20,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: ['http://localhost:3000', "https://brainsflow-admin-panel-smoky.vercel.app","http://192.168.100.71:3000"],  
+  origin: ['https://demo-frontend-kmdj.vercel.app','http://localhost:3000', "https://brainsflow-admin-panel-smoky.vercel.app","http://192.168.100.71:3000"],  
   credentials: true,  
 }));                      
 app.use(bodyParser.json());    
