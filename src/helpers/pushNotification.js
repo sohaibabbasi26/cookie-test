@@ -1,5 +1,5 @@
 const { Op, Sequelize } = require("sequelize");
-const firebaseAdmin = require("../configurations/firebaseConfig");
+// const firebaseAdmin = require("../configurations/firebaseConfig");
 const {
   getTimeZone,
   getCurrentTimeForTimezone,
