@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: brainflow_user
+      POSTGRES_PASSWORD: brainflow_password
+      POSTGRES_DB: brainflow_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    container_name: adminer_ui
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+
+networks:
+  backend:

@@ -1,0 +1,37 @@
+const express = require("express");
+const router = express.Router();
+const authenticateJWT = require("../middlewares/jwtVerificator");
+const handlers = require("../handlers/userHandlers");
+const validators = require("../middlewares/formValidators");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
+router.get("/get-user-info", authenticateJWT, handlers.getUserInfo);
+router.get("/get-all-categories", authenticateJWT, handlers.getAllCategories);
+router.get("/get-popular-videos", authenticateJWT, handlers.getPopularVideos);
+router.post("/like-a-video", authenticateJWT, handlers.likeVideoHandler);
+router.post("/save-a-video", authenticateJWT, handlers.saveVideoHandler);
+router.post("/increment-a-view", authenticateJWT, handlers.incrementAView);
+router.get("/get-saved-videos", authenticateJWT, handlers.getSavedVideos);
+router.get("/get-liked-videos", authenticateJWT, handlers.getLikedVideos);
+router.get("/get-custom-manifestation-video", authenticateJWT, handlers.getCustomManifestationVideo);
+router.post("/create-a-note", validators.noteCreationValidator, authenticateJWT, handlers.createNoteHandler);
+router.get("/get-all-notes", authenticateJWT, handlers.getAllNotes);
+router.put("/edit-note", validators.noteEditValidator, authenticateJWT, handlers.editNoteHandler);            
+router.delete("/delete-note", authenticateJWT, handlers.deleteNotes);
+router.get("/search-notes", authenticateJWT, handlers.searchNotes);
+router.patch("/update-user-plan", authenticateJWT, handlers.updateUserPlan);
+router.patch("/change-password" , validators.changePasswordValidator, authenticateJWT, handlers.handlePasswordChange);  
+router.delete("/delete-account", authenticateJWT, handlers.handleAccountDeletion);
+router.patch("/update-user-info", validators.updateUserInfoValidator, upload.single('file'), authenticateJWT, handlers.userUpdateInfo);    
+router.get("/get-videos-by-category", authenticateJWT, handlers.getVideosByCategory);  
+router.post("/create-reminder", validators.reminderCreationValidator, authenticateJWT, handlers.createReminders);
+router.get("/get-reminders", authenticateJWT, handlers.getReminders);
+router.patch("/customize-reminders", authenticateJWT, handlers.customizeReminderHandler);
+router.delete("/delete-reminder", authenticateJWT, handlers.deleteReminderHandler);
+router.get("/get-all-notifications", authenticateJWT, handlers.getAllNotificationsHandler);
+router.post("/submit-feedback",validators.submitFeedbackValidator, authenticateJWT, handlers.submitFeedback);
+router.get("/get-videos-by-popularity", authenticateJWT, handlers.getVideosByPopularityHandler);
+router.get("/get-user-saved-liked-videos", authenticateJWT, handlers.getUserSavedLikedVideos);
+
+module.exports = router;
